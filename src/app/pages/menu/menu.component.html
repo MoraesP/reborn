@@ -1,0 +1,176 @@
+<div class="menu">
+  <div class="central">
+    <div
+      class="progress"
+      role="progressbar"
+      aria-label="Basic example"
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <div class="progress-bar" [style.width.%]="porcentagemAtual">
+        {{ porcentagemAtual }}%
+      </div>
+    </div>
+    @switch (pagina) { @case (0) {
+    <ng-container *ngTemplateOutlet="primeiraPagina"></ng-container>
+    } @case (1) {
+    <ng-container *ngTemplateOutlet="segundaPagina"></ng-container>
+    } }
+  </div>
+</div>
+
+<ng-template #primeiraPagina>
+  <form [formGroup]="form">
+    <label class="titulo">Dados Pessoais</label>
+    <div class="dados">
+      <div class="of-hidden w-completo">
+        <label class="label-campo">Nome</label>
+        <input
+          type="text"
+          class="form-control mb-10"
+          placeholder="Nome"
+          formControlName="nome"
+        />
+      </div>
+      <div class="of-hidden w-150">
+        <label class="label-campo">Data de Nascimento</label>
+        <input
+          type="text"
+          class="form-control mb-10"
+          mask="00/00/0000"
+          placeholder="DD/MM/AAAA"
+          formControlName="data"
+        />
+      </div>
+      <div class="of-hidden w-200">
+        <label class="label-campo">Celular</label>
+        <input
+          type="text"
+          class="form-control mb-10"
+          mask="(00) 00000-0000"
+          placeholder="(DDD) XXXXX-XXXX"
+          formControlName="celular"
+        />
+      </div>
+    </div>
+    <label class="label-campo">Email</label>
+    <input
+      type="text"
+      class="form-control mb-10"
+      placeholder="Email"
+      formControlName="email"
+    />
+    <div class="dados">
+      <div class="of-hidden w-completo">
+        <label class="label-campo">Nome do responsável</label>
+        <input type="text" class="form-control mb-10" placeholder="Nome" />
+      </div>
+      <div class="of-hidden w-200">
+        <label class="label-campo">Celular do responsável</label>
+        <input
+          type="text"
+          class="form-control mb-10"
+          mask="(00) 00000-0000"
+          placeholder="(DDD) XXXXX-XXXX"
+        />
+      </div>
+    </div>
+    <div class="w-200">
+      <label class="label-campo">CEP</label>
+      <input
+        type="text"
+        class="form-control mb-10"
+        placeholder="CEP"
+        formControlName="cep"
+        mask="00000-000"
+        (maskFilled)="buscarCep()"
+        (ngModelChange)="alterarCep()"
+      />
+    </div>
+    <div class="form-check mb-10 ml-10">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="cepManual"
+        [value]="cepManual"
+        (click)="habilitarDesabilitarCepManual()"
+      />
+      <label class="form-check-label" for="cepManual">
+        Inserir CEP manualmente
+      </label>
+    </div>
+    <label class="label-campo">Bairro</label>
+    <input
+      type="text"
+      class="form-control mb-10"
+      placeholder="Bairro"
+      formControlName="bairro"
+    />
+    <label class="label-campo">Endereço</label>
+    <input
+      type="text"
+      class="form-control mb-10"
+      placeholder="Endereço"
+      formControlName="endereco"
+    />
+    <div class="dados">
+      <div class="w-50">
+        <label class="label-campo">Cidade</label>
+        <input
+          type="text"
+          class="form-control mb-10"
+          placeholder="Cidade"
+          formControlName="cidade"
+        />
+      </div>
+      <div class="w-50">
+        <label class="label-campo">Estado</label>
+        <input
+          type="text"
+          class="form-control mb-10"
+          placeholder="Estado"
+          formControlName="estado"
+        />
+      </div>
+    </div>
+    <div class="dados">
+      <div class="w-50">
+        <label class="label-campo">Número</label>
+        <input
+          type="text"
+          class="form-control mb-10"
+          placeholder="Número"
+          formControlName="numero"
+        />
+      </div>
+      <div class="w-50">
+        <label class="label-campo">Complemento</label>
+        <input
+          type="text"
+          class="form-control mb-10"
+          placeholder="Complemento"
+          formControlName="complemento"
+        />
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-success" (click)="proximaPagina()">
+        Prosseguir
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #segundaPagina>
+  <div>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-success" (click)="voltarPagina()">
+        Voltar
+      </button>
+      <button type="button" class="btn btn-success" (click)="proximaPagina()">
+        Prosseguir
+      </button>
+    </div>
+  </div>
+</ng-template>

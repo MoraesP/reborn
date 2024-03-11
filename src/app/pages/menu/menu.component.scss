@@ -1,0 +1,89 @@
+.menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.central {
+  width: 80%;
+  height: 80%;
+  padding: 30px;
+  border-radius: 4px;
+  overflow-y: auto;
+  border: 1px solid black;
+
+  .dados {
+    display: flex;
+    gap: 15px;
+  }
+  .progress {
+    margin-bottom: 30px;
+  }
+  .label-campo {
+    margin-left: 15px;
+    text-wrap: nowrap;
+  }
+  .titulo {
+    font-weight: bold;
+    margin-left: 5px;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+  }
+}
+
+.form-check-input {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.form-check-label {
+  font-size: 1rem;
+}
+
+.form-control {
+  border: 0px;
+  border-radius: 0;
+  border-bottom: 1px solid black;
+  padding: 0 15px 5px 15px;
+
+  &:focus {
+    box-shadow: none;
+    border-color: skyblue;
+  }
+}
+
+.of-hidden {
+  overflow: hidden;
+}
+
+.w-150 {
+  width: 150px;
+  min-width: 150px;
+}
+
+.w-200 {
+  width: 200px;
+  min-width: 200px;
+}
+
+.w-completo {
+  min-width: 250px;
+  width: -webkit-fill-available;
+}
+
+@media only screen and (max-width: 700px) {
+  .central {
+    .dados {
+      display: block;
+    }
+  }
+  .w-completo,
+  .w-50,
+  .w-150,
+  .w-200 {
+    width: auto !important;
+    min-width: auto !important;
+  }
+}
