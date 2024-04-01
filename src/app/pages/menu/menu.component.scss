@@ -22,7 +22,7 @@
     margin-bottom: 30px;
   }
   .label-campo {
-    margin-left: 15px;
+    margin-left: 10px;
     text-wrap: nowrap;
   }
   .titulo {
@@ -30,6 +30,11 @@
     margin-left: 5px;
     margin-bottom: 30px;
     font-size: 1.5rem;
+  }
+
+  .responsaveis {
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -44,9 +49,9 @@
 
 .form-control {
   border: 0px;
+  padding-left: 10px;
   border-radius: 0;
   border-bottom: 1px solid black;
-  padding: 0 15px 5px 15px;
 
   &:focus {
     box-shadow: none;

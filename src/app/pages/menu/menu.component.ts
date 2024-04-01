@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CepService } from '../../services/cep.service';
 import {
   FormBuilder,
+  FormsModule,
   ReactiveFormsModule,
   UntypedFormGroup,
   Validators,
@@ -15,11 +16,18 @@ import {
 import { CEP } from '../../interfaces/cep';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
 
+enum TipoResponsavel {
+  MAE = 'Mãe',
+  PAI = 'Pai',
+  OUTRO = 'Outro',
+}
+
 @Component({
   selector: 'app-menu',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     NgxMaskDirective,
     MatInputModule,
@@ -38,6 +46,8 @@ export class MenuComponent implements OnInit {
   pagina = 0;
   quantidadeDePaginas = 2;
 
+  tiposResponsaveis = TipoResponsavel;
+
   constructor(private fb: FormBuilder, private cepSerivce: CepService) {}
 
   ngOnInit(): void {
@@ -52,6 +62,13 @@ export class MenuComponent implements OnInit {
       cidade: null,
       estado: null,
       numero: [null, Validators.required],
+      responsaveis: [
+        [
+          { tipo: null, nome: null, celular: null },
+          { tipo: null, nome: null, celular: null },
+        ],
+        [Validators.required, Validators.minLength(1)],
+      ],
       complemento: null,
     });
     this.desabilitarCamposDeEndereco();
@@ -128,11 +145,18 @@ export class MenuComponent implements OnInit {
   }
 
   proximaPagina() {
+    console.log(this.form.value);
     this.pagina++;
   }
 
   voltarPagina() {
     this.pagina--;
+  }
+
+  adicionarOutroResponsavel() {
+    const responsaveis = this.form.get('responsaveis')?.value as any[];
+    responsaveis.push({ tipo: null, nome: null, celular: null });
+    this.form.get('responsaveis')?.setValue(responsaveis);
   }
 
   sendEmail() {

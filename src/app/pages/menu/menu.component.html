@@ -25,7 +25,7 @@
     <label class="titulo">Dados Pessoais</label>
     <div class="dados">
       <div class="of-hidden w-completo">
-        <label class="label-campo">Nome</label>
+        <label class="label-campo">Nome Completo</label>
         <input
           type="text"
           class="form-control mb-10"
@@ -61,10 +61,30 @@
       placeholder="Email"
       formControlName="email"
     />
+    @for (responsavel of this.form.get('responsaveis')?.value; track $index) {
     <div class="dados">
+      <div class="of-hidden w-200 responsaveis">
+        <select
+          class="form-select"
+          aria-placeholder="Responsável"
+          [(ngModel)]="responsavel.tipo"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <option [value]="null" disabled>Responsável</option>
+          <option [value]="tiposResponsaveis.MAE">Mãe</option>
+          <option [value]="tiposResponsaveis.PAI">Pai</option>
+          <option [value]="tiposResponsaveis.OUTRO">Outro</option>
+        </select>
+      </div>
       <div class="of-hidden w-completo">
         <label class="label-campo">Nome do responsável</label>
-        <input type="text" class="form-control mb-10" placeholder="Nome" />
+        <input
+          type="text"
+          class="form-control mb-10"
+          placeholder="Nome"
+          [(ngModel)]="responsavel.nome"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
       <div class="of-hidden w-200">
         <label class="label-campo">Celular do responsável</label>
@@ -73,9 +93,19 @@
           class="form-control mb-10"
           mask="(00) 00000-0000"
           placeholder="(DDD) XXXXX-XXXX"
+          [(ngModel)]="responsavel.celular"
+          [ngModelOptions]="{ standalone: true }"
         />
       </div>
     </div>
+    }
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="adicionarOutroResponsavel()"
+    >
+      Adicionar mais um responsável
+    </button>
     <div class="w-200">
       <label class="label-campo">CEP</label>
       <input
